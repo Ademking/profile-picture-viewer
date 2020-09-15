@@ -16,7 +16,7 @@ Bypass the Facebook profile picture guard and see user's profile picture in __fu
 
 ### How To Use
 
-0. Open victim profile
+0. Open victim's profile
 1. Right-Click and Select "Unlock full size profile picture"
 
 ### How does this extension works
