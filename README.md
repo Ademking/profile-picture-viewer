@@ -1,8 +1,8 @@
 # Facebook Profile Picture Viewer
 
-<div style="text-align: center">
+<p align="center">
     <img src="https://i.imgur.com/B9rUuLJ.png">
-</div>
+</p>
 
 Bypass the Facebook profile picture guard and see user's profile picture in __full size__ 📷
 
