@@ -1,12 +1,14 @@
 # Facebook Profile Picture Viewer
 
-<p align="center">
-    <img src="https://i.imgur.com/B9rUuLJ.png">
-</p>
+![](https://i.imgur.com/oysTQEP.png)
 
 Bypass the Facebook profile picture guard and see user's profile picture in __full size__ 📷
 
-### How to Install:
+### How to Install
+[Click Here to Download from Chrome Web Store](https://chrome.google.com/webstore/detail/facebook-profile-picture/olhdholihhioakdjhfhligfehfjjfeoc?hl=fr&authuser=0)
+
+
+### How to Install (From Github):
 
 0. Download this repository
 1. Navigate to **chrome://extensions/** 
