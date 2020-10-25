@@ -1,15 +1,17 @@
 /**
- * Facebook Profile Picture Viewer V 1.0.0
+ * Facebook Profile Picture Viewer v1.0.1
  * -------------------
  * See Facebook user's profile picture in full size
  * -------------------
  * Created By: Adem Kouki
  * Facebook: https://www.facebook.com/AdemKouki.Officiel/
- * Github: https://github.com/Ademking
+ * Github: https://github.com/Ademking/fb-profile-picture-viewer
  */
 
 
-// Returns Current Tab URL
+/**
+ * Returns Current Tab URL
+ */
 function get_current_tab_url() {
     return new Promise((resolve, reject) => {
         chrome.tabs.query({
@@ -63,18 +65,54 @@ function get_username_id(username) {
 }
 
 /**
- * Opens Full Size Profile Picture
+ * Get User Access Token
+ */
+function get_fb_access_token() {
+    return new Promise((resolve, reject) => {
+        fetch("https://m.facebook.com/composer/ocelot/async_loader/?publisher=feed")
+            .then(response => {
+                return response.text();
+            })
+            .then(code => {
+                const regex = /accessToken\\":\\"(.*?)\\"/;
+                var regex_res = code.match(regex);
+                if (regex_res) {
+                    resolve(regex_res[1])
+                } else {
+                    alert("Could not get your facebook access token. Please check if you're logged in")
+                    reject(new Error(`Could not get your facebook access token. Please check if you're logged in`));
+                }
+            })
+            .catch(err => {
+                alert("Could not get your facebook access token. Please check if you're logged in")
+                reject(new Error(`Could not get your facebook access token. Please check if you're logged in`));
+            });
+    })
+}
+
+
+
+/**
+ * Opens Full Size Profile Picture using fb access token
  * @param id FB Profile ID
  */
 function open_full_hd_photo(id) {
-    window.open(`https://graph.facebook.com/${id}/picture?width=1000`)
+
+    get_fb_access_token() // Get user access token
+    .then(access_token => {
+        window.open(`https://graph.facebook.com/${id}/picture?width=5000&access_token=${access_token}`);
+    })
+
 }
 
 /**
- * Start Function
+ * When extension started from Context menu
  */
 function start() {
-    get_current_tab_url().then(get_current_username).then(get_username_id).then(open_full_hd_photo);
+    get_current_tab_url()
+        .then(get_current_username)
+        .then(get_username_id)
+        .then(open_full_hd_photo);
 }
 
 /**
