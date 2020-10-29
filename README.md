@@ -25,9 +25,11 @@ Bypass the Facebook profile picture guard and see user's profile picture in __fu
 
 The trick is simple : 
 
-1. Get Facebook User ID
-2. Fetch "mbasic.facebook.com/USERNAME" and search for Profile id
-3. Replace "PROFILE_ID" in below URI : " http://graph.facebook.com/PROFILE_ID/picture?width=2000"
+1. Fetch `https://mbasic.facebook.com/USERNAME` and get "Profile id"
+2. Fetch `https://m.facebook.com/composer/ocelot/async_loader/?publisher=feed` and get "Facebook User Access Token"
+3. Open this url to get full size image: `
+https://graph.facebook.com/${profile_id}/picture?width=5000&access_token=${access_token}
+`
 
 ### Note
 
