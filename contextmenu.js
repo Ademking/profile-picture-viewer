@@ -68,26 +68,31 @@ function get_username_id(username) {
  * Get User Access Token
  */
 function get_fb_access_token() {
-    return new Promise((resolve, reject) => {
-        fetch("https://m.facebook.com/composer/ocelot/async_loader/?publisher=feed")
-            .then(response => {
-                return response.text();
-            })
-            .then(code => {
-                const regex = /accessToken\\":\\"(.*?)\\"/;
-                var regex_res = code.match(regex);
-                if (regex_res) {
-                    resolve(regex_res[1])
-                } else {
-                    alert("Could not get your facebook access token. Please check if you're logged in")
-                    reject(new Error(`Could not get your facebook access token. Please check if you're logged in`));
-                }
-            })
-            .catch(err => {
-                alert("Could not get your facebook access token. Please check if you're logged in")
-                reject(new Error(`Could not get your facebook access token. Please check if you're logged in`));
-            });
-    })
+    // return new Promise((resolve, reject) => {
+        // fetch("https://m.facebook.com/composer/ocelot/async_loader/?publisher=feed")
+            // .then(response => {
+                // return response.text();
+            // })
+            // .then(code => {
+                // const regex = /accessToken\\":\\"(.*?)\\"/;
+                // var regex_res = code.match(regex);
+                // if (regex_res) {
+                    // resolve(regex_res[1])
+                // } else {
+                    // alert("Could not get your facebook access token. Please check if you're logged in")
+                    // reject(new Error(`Could not get your facebook access token. Please check if you're logged in`));
+                // }
+            // })
+            // .catch(err => {
+                // alert("Could not get your facebook access token. Please check if you're logged in")
+                // reject(new Error(`Could not get your facebook access token. Please check if you're logged in`));
+            // });
+    // })
+	
+	// Update version 1.0.2: Fixed Access token	
+	return new Promise((resolve, reject) => {
+		resolve("6628568379%7Cc1e620fa708a1d5696fb991c1bde5662")
+	});
 }
 
 
