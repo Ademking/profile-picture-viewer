@@ -21,6 +21,18 @@ Bypass the Facebook profile picture guard and see user's profile picture in __fu
 0. Open victim's profile
 1. Right-Click and Select "Unlock full size profile picture"
 
+<<<<<<< HEAD
+=======
+### How does this extension works
+
+The trick is simple : 
+
+1. Fetch `https://mbasic.facebook.com/USERNAME` and get "Profile id"
+2. Fetch `https://m.facebook.com/composer/ocelot/async_loader/?publisher=feed` and get "Facebook User Access Token"
+3. Open this url to get full size image: `
+https://graph.facebook.com/${profile_id}/picture?width=5000&access_token=${access_token}
+`
+>>>>>>> 098cf8407a08a544730fd4888bc7fb1563a5b64f
 
 ### Note
 
