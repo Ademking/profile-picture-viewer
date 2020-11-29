@@ -49,7 +49,7 @@ function get_username_id(username) {
         fetch('https://mbasic.facebook.com/' + username).then(response => {
             return response.text();
         }).then(html => {
-            const regex = /\?owner_id=([a-z0-9\-]+)\&?/i;
+            const regex = /owner_id=([a-z0-9\-]+)\&?/i;
             var regex_res = html.match(regex);
             if (regex_res) {
                 resolve(regex_res[1])
