@@ -9,12 +9,12 @@ Bypass the Facebook profile picture guard and see user's profile picture in __fu
 
 ### Installation Instructions:
 
-0. Download this repository as a [ZIP file from GitHub](https://github.com/Ademking/fb-profile-picture-viewer/archive/master.zip)
-1. Unzip the file and you should have a folder named fb-profile-picture-viewer-master.
+0. Download this repository as a [ZIP file from GitHub](https://github.com/Ademking/fb-profile-picture-viewer/releases/latest/download/fb-profile-picture-viewer.zip)
+1. Unzip the file and you should have a folder named fb-profile-picture-viewer.
 2. Navigate to **chrome://extensions/** 
 3. Ensure the checkbox labeled **Developer mode** is enabled. 
 4. Click the button labeled **Load unpacked extension**
-5. Select "fb-profile-picture-viewer-master" directory.
+5. Select "fb-profile-picture-viewer" directory.
 
 ### How To Use
 
