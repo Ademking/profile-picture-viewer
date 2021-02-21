@@ -34,7 +34,9 @@ function get_current_tab_url() {
 function get_current_username(link) {
   return new Promise((resolve, reject) => {
     const test = new URL(link);
-    if (test.pathname === "/profile.php") {
+    if (test.pathname === "/friends/") {
+      resolve(test.searchParams.get("profile_id"));
+    } else if (test.pathname === "/profile.php") {
       resolve(test.searchParams.get("id"));
     } else {
       resolve(test.pathname);
