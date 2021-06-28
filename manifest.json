@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "Facebook Profile Picture Viewer",
-    "version": "1.0.3",
-    "description": "Facebook Profile Picture Viewer",
+    "name": "Profile Picture Viewer",
+    "version": "1.0.5",
+    "description": "Profile Picture Viewer",
     "page_action": {
         "default_icon": "icons/19.png",
         "default_title": "Unlock full size profile picture"

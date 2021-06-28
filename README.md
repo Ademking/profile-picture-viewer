@@ -1,11 +1,8 @@
-# Facebook Profile Picture Viewer
+# FB Profile Picture Viewer
 
 ![](https://i.imgur.com/SKdCUeN.png)
 
-Bypass the Facebook profile picture guard and see user's profile picture in __full size__ 📷
-
-## [Click Here to Download](https://chrome.google.com/webstore/detail/facebook-profile-picture/olhdholihhioakdjhfhligfehfjjfeoc?hl=fr&authuser=0)
-
+Bypass the FB profile picture guard and see user's profile picture in __full size__ 📷
 
 ### Installation Instructions:
 
@@ -25,9 +22,15 @@ Bypass the Facebook profile picture guard and see user's profile picture in __fu
 
 I highly recommend to not use these kinds of tricks to find and view private profile pictures, because all people like to maintain some privacy and they don't want others to disclose their privacy.
 
-Please take in consideration that Facebook is updating its Website regularly and thus could make the code throw errors. If any error encountered please open an new issue request
+Please take in consideration that Fb is updating its Website regularly and thus could make the code throw errors. If any error encountered please open an new issue request
 
 ### Changelog
+
+__1.0.5__
+- Fix `/friends/` and `/groups/` url problem. Now it's working on every page
+
+__1.0.4__
+- We received a trademark complaint from FB. So... I removed everything related to FB (logo, name, etc...)
 
 __1.0.3__
 - Fixed an issue with logged user profile

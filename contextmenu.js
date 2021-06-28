@@ -1,10 +1,10 @@
 /**
- * Facebook Profile Picture Viewer
+ * FB Profile Picture Viewer
  * -------------------
- * See Facebook user's profile picture in full size
+ * See FB user's profile picture in full size
  * -------------------
  * Created By: Adem Kouki
- * Facebook: https://www.facebook.com/AdemKouki.Officiel/
+ * FB: https://www.facebook.com/AdemKouki.Officiel/
  * Github: https://github.com/Ademking/fb-profile-picture-viewer
  */
 
@@ -29,16 +29,26 @@ function get_current_tab_url() {
 
 /**
  * Returns Current User Profile username from URL
- * @param link Facebook Profile URL
+ * @param link FB Profile URL
  */
 function get_current_username(link) {
+  console.log('from extension', link)
   return new Promise((resolve, reject) => {
     const test = new URL(link);
-    if (test.pathname === "/friends/") {
+    // If url looks like this:
+    // https://facebook.com/friends/suggestions/?profile_id=xxxxxxxxxxxxxxx
+    if (test.pathname.includes('/friends/')) {
       resolve(test.searchParams.get("profile_id"));
-    } else if (test.pathname === "/profile.php") {
+    } 
+    // If url looks like this:
+    // https://www.facebook.com/groups/xxxxxxxxxxxxxxxx/user/xxxxxxxxxxxxxxx/
+    else if (test.pathname.includes('/groups/') ) {
+        resolve(test.pathname.split('/').filter(str => str != "")[3]) 
+    }
+    else if (test.pathname === "/profile.php") {
       resolve(test.searchParams.get("id"));
-    } else {
+    } 
+    else {
       resolve(test.pathname);
     }
   });
@@ -60,13 +70,13 @@ function get_username_id(username) {
         if (regex_res) {
           resolve(regex_res[1]);
         } else {
-          alert("Could not extract Facebook Profile Picture");
-          reject(new Error(`Could not extract Facebook Profile Picture`));
+          alert("Could not extract FB Profile Picture");
+          reject(new Error(`Could not extract FB Profile Picture`));
         }
       })
       .catch((err) => {
-        alert("Could not extract Facebook Profile Picture");
-        reject(new Error(`Could not extract Facebook Profile Picture`));
+        alert("Could not extract FB Profile Picture");
+        reject(new Error(`Could not extract FB Profile Picture`));
       });
   });
 }
