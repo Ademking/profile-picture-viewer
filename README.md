@@ -1,5 +1,3 @@
-# Profile Picture Viewer
-
 <p align="center">
   <img src="https://i.imgur.com/3P16qWp.png">
 </p>
