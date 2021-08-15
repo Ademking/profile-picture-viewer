@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Profile Picture Viewer",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Profile Picture Viewer",
     "page_action": {
         "default_icon": "icons/19.png",
@@ -12,11 +12,16 @@
         "contextMenus",
         "tabs",
         "activeTab",
-        "https://*.facebook.com/*"
+        "webRequest",
+        "webRequestBlocking",
+        "https://*.facebook.com/*",
+        "https://*.instagram.com/*"
     ],
     "background": {
         "scripts": [
-            "contextmenu.js"
+            "contextmenu.js",
+            "facebook.js",
+            "instagram.js"
         ]
     },
     "homepage_url": "https://github.com/Ademking/fb-profile-picture-viewer",

@@ -1,17 +1,25 @@
-# FB Profile Picture Viewer
+# Profile Picture Viewer
 
-![](https://i.imgur.com/SKdCUeN.png)
+<p align="center">
+  <img src="https://i.imgur.com/3P16qWp.png">
+</p>
 
-Bypass the FB profile picture guard and see user's profile picture in __full size__ 📷
 
-### Installation Instructions:
+Bypass the FB and IG profile picture guard and see user's profile picture in __full size__ 📷
 
-0. Download this repository as a [ZIP file from GitHub](https://github.com/Ademking/fb-profile-picture-viewer/releases/latest/download/fb-profile-picture-viewer.zip)
-1. Unzip the file and you should have a folder named fb-profile-picture-viewer.
+### Download (from Google Web Store)
+
+[Click here to download](https://chrome.google.com/webstore/detail/profile-picture-viewer/olhdholihhioakdjhfhligfehfjjfeoc?hl=en&authuser=0)
+
+
+### Installation Instructions (from Gituhb):
+
+0. Download this repository by Clicking [Here](https://github.com/Ademking/profile-picture-viewer/archive/refs/heads/master.zip)
+1. Unzip the file and you should have a folder named `profile-picture-viewer-master`.
 2. Navigate to **chrome://extensions/** 
 3. Ensure the checkbox labeled **Developer mode** is enabled. 
 4. Click the button labeled **Load unpacked extension**
-5. Select "fb-profile-picture-viewer" directory.
+5. Select "profile-picture-viewer-master" directory.
 
 ### How To Use
 
@@ -22,9 +30,12 @@ Bypass the FB profile picture guard and see user's profile picture in __full siz
 
 I highly recommend to not use these kinds of tricks to find and view private profile pictures, because all people like to maintain some privacy and they don't want others to disclose their privacy.
 
-Please take in consideration that Fb is updating its Website regularly and thus could make the code throw errors. If any error encountered please open an new issue request
+Please take in consideration that Fb and IG are updating their websites regularly and thus could make the code throw errors. If any error encountered please open an new issue request
 
 ### Changelog
+
+__1.0.6__
+- You can use this extension to open and download IG profile pictures
 
 __1.0.5__
 - Fix `/friends/` and `/groups/` url problem. Now it's working on every page
