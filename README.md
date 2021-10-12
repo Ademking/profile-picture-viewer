@@ -10,7 +10,7 @@ Bypass the FB and IG profile picture guard and see user's profile picture in __f
 [Click here to download](https://chrome.google.com/webstore/detail/profile-picture-viewer/olhdholihhioakdjhfhligfehfjjfeoc?hl=en&authuser=0)
 
 
-### Installation Instructions (from Gituhb):
+### Installation Instructions (for Github):
 
 0. Download this repository by Clicking [Here](https://github.com/Ademking/profile-picture-viewer/archive/refs/heads/master.zip)
 1. Unzip the file and you should have a folder named `profile-picture-viewer-master`.
