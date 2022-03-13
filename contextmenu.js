@@ -1,6 +1,6 @@
 /**
  * Profile Picture Viewer
- * See FB / Instagram user's profile picture in full size
+ * See FB / Instagram / TikTok user's profile picture in full size
  * -------------------
  * Created By: Adem Kouki
  * FB: https://www.facebook.com/AdemKouki.Officiel/
@@ -21,10 +21,14 @@ chrome.contextMenus.create({
       else if (url.includes("instagram.com")) {
         get_instagram_profile_picture(url);
       }
+      // Tiktok
+      else if (url.includes("tiktok.com")) {
+        get_tiktok_profile_picture(url);
+      }
       else {
         alert("Could not extract Profile Picture");
       }
     })
   },
-  documentUrlPatterns: ["*://*.facebook.com/*", "*://*.instagram.com/*"],
+  documentUrlPatterns: ["*://*.facebook.com/*", "*://*.instagram.com/*", "*://*.tiktok.com/*"],
 });
