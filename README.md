@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="https://i.imgur.com/3P16qWp.png">
+  <img src="https://i.imgur.com/JVoYjlC.png">
 </p>
 
 
-Bypass the FB and IG profile picture guard and see user's profile picture in __full size__ 📷
+Bypass the FB / IG / TikT0k profile picture guard and see user's profile picture in __full size__ 📷
 
 ### Download (from Google Web Store)
 
@@ -31,6 +31,9 @@ I highly recommend to not use these kinds of tricks to find and view private pro
 Please take in consideration that Fb and IG are updating their websites regularly and thus could make the code throw errors. If any error encountered please open an new issue request
 
 ### Changelog
+
+__1.0.7__
+- You can use this extension to open and download TikT0k profile pictures
 
 __1.0.6__
 - You can use this extension to open and download IG profile pictures
