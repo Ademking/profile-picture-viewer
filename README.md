@@ -28,7 +28,7 @@ Bypass the FB / IG / TikT0k profile picture guard and see user's profile picture
 
 I highly recommend to not use these kinds of tricks to find and view private profile pictures, because all people like to maintain some privacy and they don't want others to disclose their privacy.
 
-Please take in consideration that Fb and IG are updating their websites regularly and thus could make the code throw errors. If any error encountered please open an new issue request
+Please take in consideration that social media websites are updating regularly and thus could make the code throw errors. If any error encountered please open an new issue request
 
 ### Changelog
 
