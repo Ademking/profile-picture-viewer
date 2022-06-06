@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Profile Picture Viewer",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "Profile Picture Viewer",
     "page_action": {
         "default_icon": "icons/19.png",

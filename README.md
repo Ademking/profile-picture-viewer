@@ -32,6 +32,9 @@ Please take in consideration that social media websites are updating regularly a
 
 ### Changelog
 
+__1.0.8__
+- Fixed IG issue. Everything is working again
+
 __1.0.7__
 - You can use this extension to open and download TikT0k profile pictures
 
