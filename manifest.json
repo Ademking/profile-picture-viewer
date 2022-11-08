@@ -15,7 +15,8 @@
         "webRequestBlocking",
         "https://*.facebook.com/*",
         "https://*.instagram.com/*",
-        "https://*.tiktok.com/*"
+        "https://*.tiktok.com/*",
+		"https://www.messenger.com/t/*"
     ],
     "background": {
         "scripts": [
