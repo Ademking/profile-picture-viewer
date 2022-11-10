@@ -13,7 +13,7 @@ chrome.contextMenus.create({
   onclick: () => {
     get_current_tab_url().then(url => {
       // facebook
-      if (url.includes('facebook.com')) {
+      if (url.includes('facebook.com') || url.includes('messenger.com')) {
         get_facebook_profile_picture(url)
       }
       // Instagram
@@ -28,5 +28,5 @@ chrome.contextMenus.create({
       }
     })
   },
-  documentUrlPatterns: ['*://*.facebook.com/*', '*://*.instagram.com/*', '*://*.tiktok.com/*']
+  documentUrlPatterns: ['*://*.facebook.com/*', '*://*.messenger.com/*', '*://*.instagram.com/*', '*://*.tiktok.com/*']
 })

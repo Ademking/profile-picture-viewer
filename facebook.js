@@ -41,6 +41,10 @@ function get_current_username(link) {
     // https://www.facebook.com/groups/xxxxxxxxxxxxxxxx/user/xxxxxxxxxxxxxxx/
     else if (test.pathname.includes('/groups/')) {
       resolve(test.pathname.split('/').filter(str => str != '')[3])
+    // If url looks like this:
+    // https://www.messenger.com/t/xxxxxxxxxxxxxxxx
+    } else if (test.pathname.includes('/t/')) {
+      resolve(test.pathname.split('/').filter(str => str != '')[1])
     } else if (test.pathname === '/profile.php') {
       resolve(test.searchParams.get('id'))
     } else {
