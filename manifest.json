@@ -16,14 +16,16 @@
         "https://*.facebook.com/*",
         "https://*.instagram.com/*",
         "https://*.tiktok.com/*",
-        "https://www.messenger.com/t/*"
+        "https://www.messenger.com/t/*",
+        "https://twitter.com/*"
     ],
     "background": {
         "scripts": [
             "contextmenu.js",
             "facebook.js",
             "instagram.js",
-            "tiktok.js"
+            "tiktok.js",
+            "twitter.js"
         ]
     },
     "homepage_url": "https://github.com/Ademking/fb-profile-picture-viewer",

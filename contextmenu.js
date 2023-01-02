@@ -23,10 +23,15 @@ chrome.contextMenus.create({
       // Tiktok
       else if (url.includes('tiktok.com')) {
         get_tiktok_profile_picture(url)
-      } else {
+      }
+      // Twitter
+      else if (url.includes('twitter.com')) {
+        get_twitter_profile_image(url)
+      }
+      else {
         alert('Could not extract Profile Picture')
       }
     })
   },
-  documentUrlPatterns: ['*://*.facebook.com/*', '*://*.messenger.com/*', '*://*.instagram.com/*', '*://*.tiktok.com/*']
+  documentUrlPatterns: ['*://*.facebook.com/*', '*://*.messenger.com/*', '*://*.instagram.com/*', '*://*.tiktok.com/*', '*://*.twitter.com/*']
 })
