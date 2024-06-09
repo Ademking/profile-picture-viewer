@@ -2,7 +2,7 @@
  * get facebook profile picture from url
  * @param url
  */
-async function get_facebook_profile_picture(url) {
+export async function get_facebook_profile_picture(url) {
   const current_username = get_current_username(url)
   const username_id = await get_username_id(current_username)
   open_full_hd_photo(username_id)
@@ -61,7 +61,7 @@ async function get_username_id(username) {
  * @param id FB Profile ID
  */
 function open_full_hd_photo(id) {
-  window.open(`https://graph.facebook.com/${id}/picture?width=5000&access_token=${fb_access_token}`)
+  chrome.tabs.create({url: `https://graph.facebook.com/${id}/picture?width=5000&access_token=${fb_access_token}`})
 }
 
 /**

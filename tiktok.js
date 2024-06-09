@@ -1,4 +1,4 @@
-async function get_tiktok_profile_picture(url) {
+export async function get_tiktok_profile_picture(url) {
   const username = get_tiktok_username(url)
   const profile_picture_url = await get_tiktok_profile_picture_url(username)
   open_tiktok_full_hd_photo(profile_picture_url)

@@ -1,29 +1,39 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Profile Picture Viewer",
     "version": "1.0.9",
     "description": "Profile Picture Viewer",
-    "page_action": {
-        "default_icon": "icons/19.png",
+    "action": {
+        "default_icon": {
+            "16": "icons/16.png",
+            "48": "icons/48.png",
+            "128": "icons/128.png"
+        },
         "default_title": "Unlock full size profile picture"
     },
     "author": "Adem Kouki",
     "permissions": [
         "contextMenus",
         "tabs",
-        "webRequest",
-        "webRequestBlocking",
+        "declarativeNetRequest"
+    ],
+    "host_permissions": [
         "https://*.facebook.com/*",
         "https://*.instagram.com/*",
         "https://*.tiktok.com/*",
         "https://www.messenger.com/t/*"
     ],
     "background": {
-        "scripts": [
-            "contextmenu.js",
-            "facebook.js",
-            "instagram.js",
-            "tiktok.js"
+        "service_worker": "contextmenu.js",
+        "type": "module"
+    },
+    "declarative_net_request": {
+        "rule_resources": [
+            {
+                "id": "instagram-set-user-agent",
+                "enabled": true,
+                "path": "instagram_rules.json"
+            }
         ]
     },
     "homepage_url": "https://github.com/Ademking/fb-profile-picture-viewer",
