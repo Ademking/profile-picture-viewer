@@ -1,40 +1,33 @@
 function get_tiktok_profile_picture(url) {
-  get_tiktok_username(url).then(get_tiktok_profile_picture_url).then(open_tiktok_full_hd_photo)
+  get_tiktok_username(url)
+      .then(get_tiktok_profile_picture_url)
+      .then(open_tiktok_full_hd_photo)
+      .catch(err => console.error(err));
 }
 
 function get_tiktok_username(link) {
-  return new Promise((resolve, reject) => {
-    let regex = /(?<=tiktok.com\/)@[a-zA-z0-9.]*/
-    let username = link.match(regex)[0]
-    console.log('TikTok Username: ' + username)
-    resolve(username)
-  })
+  const regex = /(?<=tiktok.com\/)@[a-zA-Z0-9_.]+/;
+  const match = link.match(regex);
+  if (match) {
+      return Promise.resolve(match[0]);
+  }
+  return Promise.reject(new Error("Invalid TikTok URL."));
 }
 
 function get_tiktok_profile_picture_url(username) {
-  return new Promise((resolve, reject) => {
-    let url = `https://www.tiktok.com/${username}`
-    fetch(url)
-      .then(response => {
-        return response.text()
-      })
+  const url = `https://www.tiktok.com/${username}`;
+  return fetch(url)
+      .then(response => response.text())
       .then(html => {
-        let regex = /(?<=avatarLarger":").+?(?=","avatarMedium)/
-        let profile_picture_encoded = html.match(regex)[0]
-        let profile_picture_url = decodeURIComponent(JSON.parse(`"${profile_picture_encoded}"`))
-        console.log(profile_picture_url)
-        resolve(profile_picture_url)
-      })
-      .catch(err => {
-        console.log(err)
-        reject(err)
-      })
-  })
+          const regex = /(?<=avatarLarger":").+?(?=","avatarMedium)/;
+          const match = html.match(regex);
+          if (match) {
+              return JSON.parse(`"${match[0]}"`);
+          }
+          throw new Error("Could not extract TikTok Profile Picture URL.");
+      });
 }
 
 function open_tiktok_full_hd_photo(url) {
-  return new Promise((resolve, reject) => {
-    chrome.tabs.create({ url })
-    resolve(url)
-  })
+  chrome.tabs.create({ url });
 }

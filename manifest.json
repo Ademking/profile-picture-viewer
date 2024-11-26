@@ -1,36 +1,41 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Profile Picture Viewer",
-    "version": "1.0.9",
-    "description": "Profile Picture Viewer",
-    "page_action": {
-        "default_icon": "icons/19.png",
-        "default_title": "Unlock full size profile picture"
-    },
+    "version": "1.1.0",
+    "description": "View full-size profile pictures from Facebook, Instagram, and TikTok.",
     "author": "Adem Kouki",
     "permissions": [
         "contextMenus",
         "tabs",
-        "webRequest",
-        "webRequestBlocking",
-        "https://*.facebook.com/*",
-        "https://*.instagram.com/*",
-        "https://*.tiktok.com/*",
-        "https://www.messenger.com/t/*"
+        "declarativeNetRequest"
+    ],
+    "host_permissions": [
+        "*://*.facebook.com/*",
+        "*://*.messenger.com/*",
+        "*://*.instagram.com/*",
+        "*://*.tiktok.com/*"
     ],
     "background": {
-        "scripts": [
-            "contextmenu.js",
-            "facebook.js",
-            "instagram.js",
-            "tiktok.js"
+        "service_worker": "background.js"
+    },
+    "declarative_net_request": {
+        "rule_resources": [
+            {
+                "id": "ruleset_1",
+                "enabled": true,
+                "path": "rules.json"
+            }
         ]
     },
-    "homepage_url": "https://github.com/Ademking/fb-profile-picture-viewer",
-    "offline_enabled": false,
     "icons": {
         "16": "icons/16.png",
         "48": "icons/48.png",
         "128": "icons/128.png"
-    }
+    },
+    "action": {
+        "default_icon": "icons/19.png",
+        "default_title": "Open Full-Size Profile Picture"
+    },
+    "homepage_url": "https://github.com/Ademking/fb-profile-picture-viewer",
+    "offline_enabled": false
 }
