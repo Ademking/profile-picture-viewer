@@ -59,12 +59,12 @@ function get_current_username(link) {
  */
 function get_username_id(username) {
   return new Promise((resolve, reject) => {
-    fetch('https://mbasic.facebook.com/' + username)
+    fetch('https://m.facebook.com/' + username)
       .then(response => {
         return response.text()
       })
       .then(html => {
-        const regex = /owner_id=([a-z0-9\-]+)\&?/i
+        const regex = /"userID":"(\d+)"/;
         var regex_res = html.match(regex)
         if (regex_res) {
           resolve(regex_res[1])
