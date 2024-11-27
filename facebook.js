@@ -12,7 +12,7 @@ function get_current_username(link) {
           resolve(test.searchParams.get("profile_id"));
       } else if (test.pathname.includes("/groups/")) {
           resolve(test.pathname.split("/").filter(str => str !== "")[3]);
-      } else if (test.pathname.includes("/t/")) {
+      } else if (test.pathname.includes("/t/") && !test.pathname.includes("/e2ee/")) {
           resolve(test.pathname.split("/").filter(str => str !== "")[1]);
       } else if (test.pathname === "/profile.php") {
           resolve(test.searchParams.get("id"));
