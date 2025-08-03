@@ -32,6 +32,9 @@ Please take in consideration that social media websites are updating regularly a
 
 ### Changelog
 
+__2.0.0__
+- Fixed an issue with FB profile pictures
+
 __1.0.8__
 - Fixed IG issue. Everything is working again
 
