@@ -22,7 +22,7 @@ function get_instagram_user_id(username) {
       }
   })
       .then(res => res.json())
-      .then(data => data.data.user.profile_pic_url_hd);
+      .then(data => data.data?.user?.profile_pic_url_hd || data.user?.profile_pic_url_hd);
 }
 
 function open_instagram_full_hd_photo(picUrl) {
