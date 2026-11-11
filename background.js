@@ -1,109 +1,58 @@
-importScripts("facebook.js", "instagram.js", "tiktok.js");
+// Profile Picture Viewer (fixed)
+//
+// The original extension fetched profile data from the background service worker.
+// That broke because:
+//   - Instagram retired /api/v1/users/web_profile_info/ (it now returns an HTML 404 page),
+//   - TikTok serves a bot-check stub to requests without the tab's cookies,
+//   - the Facebook URL parser only understood a few URL shapes.
+// This version runs the lookup inside the open tab (same origin, same cookies as the page),
+// so the sites answer the way they answer the page itself.
+
+importScripts("extract.js");
 
 const MENU_ID = "openFullSizeProfilePicture";
-const SITE_PATTERNS = [
-    "*://*.facebook.com/*",
-    "*://*.messenger.com/*",
-    "*://*.instagram.com/*",
-    "*://*.tiktok.com/*"
+const SITES = [
+  "*://*.facebook.com/*",
+  "*://*.messenger.com/*",
+  "*://*.instagram.com/*",
+  "*://*.tiktok.com/*"
 ];
 
 chrome.runtime.onInstalled.addListener(() => {
-    // removeAll() first: onInstalled also fires on update/reload, and creating an
-    // existing id throws "Cannot create item with duplicate id".
-    chrome.contextMenus.removeAll(() => {
-        chrome.contextMenus.create({
-            id: MENU_ID,
-            title: "Open Full-Size Profile Picture",
-            contexts: ["all"],
-            documentUrlPatterns: SITE_PATTERNS
-        });
+  chrome.contextMenus.removeAll(() => {
+    chrome.contextMenus.create({
+      id: MENU_ID,
+      title: "Open Full-Size Profile Picture",
+      contexts: ["all"],
+      documentUrlPatterns: SITES
     });
+  });
 });
 
-// Handle context menu click
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-    if (info.menuItemId !== MENU_ID) {
-        return;
-    }
-    get_current_tab_url()
-        .then(url => {
-            const host = hostname_of(url);
-            if (host_matches(host, "facebook.com") || host_matches(host, "messenger.com")) {
-                return get_facebook_profile_picture();
-            }
-            if (host_matches(host, "instagram.com")) {
-                return get_instagram_profile_picture(url);
-            }
-            if (host_matches(host, "tiktok.com")) {
-                return get_tiktok_profile_picture(url);
-            }
-            throw new Error("Could not extract Profile Picture");
-        })
-        .catch(report_error);
+  if (info.menuItemId === MENU_ID && tab) openProfilePicture(tab);
 });
 
-// Helper function: Get the current tab's URL
-function get_current_tab_url() {
-    return get_active_tab().then(tab => {
-        if (!tab.url) {
-            throw new Error("No active tab found");
-        }
-        return tab.url;
+chrome.action.onClicked.addListener(tab => openProfilePicture(tab));
+
+async function openProfilePicture(tab) {
+  if (!tab || !tab.id) return;
+  let result;
+  try {
+    const [injection] = await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: extractProfilePicture
     });
-}
+    result = injection && injection.result;
+  } catch (err) {
+    // Not one of the supported sites, or the page can't be scripted.
+    console.error("Profile Picture Viewer:", err);
+    return;
+  }
 
-// Helper function: Get the current tab
-function get_active_tab() {
-    return new Promise((resolve, reject) => {
-        chrome.tabs.query(
-            {
-                active: true,
-                lastFocusedWindow: true
-            },
-            tabs => {
-                const tab = tabs[0];
-                if (tab && tab.id !== undefined) {
-                    resolve(tab);
-                } else {
-                    reject(new Error("No active tab found"));
-                }
-            }
-        );
-    });
-}
-
-function hostname_of(url) {
-    try {
-        return new URL(url).hostname;
-    } catch (err) {
-        return "";
-    }
-}
-
-// Match the domain itself or a subdomain of it, never a lookalike such as
-// "facebook.com.evil.net" or a URL that merely mentions the domain in a query.
-function host_matches(host, domain) {
-    return host === domain || host.endsWith(`.${domain}`);
-}
-
-function open_photo_tab(url) {
-    chrome.tabs.create({ url });
-}
-
-// Every failure path ends here, so the user always gets told something.
-function report_error(err) {
-    console.error(err);
-    return show_page_alert((err && err.message) || "Could not extract Profile Picture");
-}
-
-// alert() does not exist in an MV3 service worker, so show it in the page itself.
-function show_page_alert(message) {
-    return get_active_tab()
-        .then(tab => chrome.scripting.executeScript({
-            target: { tabId: tab.id },
-            args: [message],
-            func: text => alert(text)
-        }))
-        .catch(err => console.error(err));
+  if (result && result.url) {
+    chrome.tabs.create({ url: result.url, index: tab.index + 1, openerTabId: tab.id });
+  } else {
+    console.error("Profile Picture Viewer:", result && result.error);
+  }
 }
