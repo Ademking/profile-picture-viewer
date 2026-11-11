@@ -1,32 +1,27 @@
 {
-    "manifest_version": 3,
-    "name": "Profile Picture Viewer",
-    "version": "2.2.0",
-    "description": "View full-size profile pictures from Facebook, Instagram, and TikTok.",
-    "author": "Adem Kouki",
-    "permissions": [
-        "contextMenus",
-        "tabs",
-        "scripting"
-    ],
-    "host_permissions": [
-        "*://*.facebook.com/*",
-        "*://*.messenger.com/*",
-        "*://*.instagram.com/*",
-        "*://*.tiktok.com/*"
-    ],
-    "background": {
-        "service_worker": "background.js"
-    },
-    "icons": {
-        "16": "icons/16.png",
-        "48": "icons/48.png",
-        "128": "icons/128.png"
-    },
-    "action": {
-        "default_icon": "icons/19.png",
-        "default_title": "Open Full-Size Profile Picture"
-    },
-    "homepage_url": "https://github.com/Ademking/fb-profile-picture-viewer",
-    "offline_enabled": false
+  "manifest_version": 3,
+  "name": "Profile Picture Viewer (fixed)",
+  "version": "2.3.0",
+  "description": "Open the largest available profile picture on Facebook, Instagram and TikTok.",
+  "author": "Adem Kouki (original), local fix",
+  "homepage_url": "https://github.com/Ademking/fb-profile-picture-viewer",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_icon": "icons/19.png",
+    "default_title": "Open Full-Size Profile Picture"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["contextMenus", "scripting"],
+  "host_permissions": [
+    "*://*.facebook.com/*",
+    "*://*.messenger.com/*",
+    "*://*.instagram.com/*",
+    "*://*.tiktok.com/*"
+  ]
 }

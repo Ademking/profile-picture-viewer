@@ -1,83 +1,42 @@
-<p align="center">
-  <img src="https://i.imgur.com/JVoYjlC.png">
-</p>
+# Profile Picture Viewer (fixed)
 
-Bypass the FB / IG / TikT0k profile picture guard and see user's profile picture in **full size** 📷
+A repaired fork of [Profile Picture Viewer](https://github.com/Ademking/profile-picture-viewer)
+by Adem Kouki (MIT, see `LICENSE`). Right-click a Facebook, Instagram or TikTok profile, or click the
+toolbar icon, to open the largest version of the profile picture in a new tab.
 
-### Download (from Google Web Store)
+Version 2.3.0 builds on upstream 2.2.0. The Web Store still ships 2.0.0, and 2.2.0 still calls
+`web_profile_info` (404) and `/users/<id>/info/` (429) for Instagram and fetches TikTok from the
+background, so both remain broken there.
 
-[Click here to download](https://chrome.google.com/webstore/detail/profile-picture-viewer/olhdholihhioakdjhfhligfehfjjfeoc?hl=en&authuser=0)
+## Why the original stopped working (checked November 2026)
 
-### Installation Instructions (from GitHub):
+| Site | Original method | What happens now |
+|---|---|---|
+| Instagram | `i.instagram.com/api/v1/users/web_profile_info/` from the background | HTTP 404 HTML page, so `res.json()` throws and no tab opens |
+| TikTok | Fetch the profile page from the background, regex `avatarLarger` | Gets a 1.5 KB bot-check stub without the data |
+| Facebook | Parse the URL, fetch the page for `"userID"`, open the Graph picture URL | ID lookup still works; the parser broke on `/people/…`, `/photo/…` and similar URLs |
 
-0. Download this repository by Clicking [Here](https://github.com/Ademking/profile-picture-viewer/archive/refs/heads/master.zip)
-1. Unzip the file and you should have a folder named `profile-picture-viewer-master`.
-2. Navigate to **chrome://extensions/**
-3. Ensure the checkbox labeled **Developer mode** is enabled.
-4. Click the button labeled **Load unpacked extension**
-5. Select "profile-picture-viewer-master" directory.
+## What this version does
 
-### How To Use
+The lookup now runs **inside the open tab** (`chrome.scripting.executeScript`), so it uses the
+page's own origin and cookies and the sites answer as they do for the page.
 
-0. Open user's profile
-1. Right-Click and Select "Open Full-Size Profile Picture"
+- **Instagram**: reads `profile_id` and the page's `fb_dtsg`/`lsd` tokens from the profile page, then
+  runs the same GraphQL query instagram.com uses for a profile (`PolarisProfilePageContentQuery`,
+  `doc_id 40158838120366999`) to get `hd_profile_pic_url_info` (1080×1080 in testing). Falls back to
+  `/api/v1/users/<id>/info/` (currently 429), then to the profile's 150px `og:image`.
+  Don't use the page's `profile_pic_url_hd`: it is the **logged-in viewer's** picture, not the profile's.
+  If Instagram changes the query, copy the new `doc_id` and `__relay_internal__…` variables from the
+  page's own `/api/graphql` request in DevTools.
+- **TikTok**: reads `avatarLarger` from the page's `__UNIVERSAL_DATA_FOR_REHYDRATION__` data
+  (1080×1080 in testing).
+- **Facebook / Messenger**: understands `profile.php?id=`, `/people/<name>/<id>`, `/groups/…/user/<id>`,
+  `/friends/…?profile_id=`, chats (`/t/<id>`) and vanity URLs, then opens the Graph picture URL.
+- Failures show a short message at the bottom of the page instead of failing silently.
+- The `declarativeNetRequest` user-agent rule and the `tabs` permission are no longer needed.
 
-### Note
+## Install
 
-I highly recommend to not use these kinds of tricks to find and view private profile pictures, because all people like to maintain some privacy and they don't want others to disclose their privacy.
-
-Please take in consideration that social media websites are updating regularly and thus could make the code throw errors. If any error encountered please open an new issue request
-
-### Changelog
-
-**2.2.0**
-
-- Fixed an issue with FB and IG profile pictures
-
-**2.1.0**
-
-- Fixed an issue with TikT0k profile pictures
-
-**2.0.0**
-
-- Fixed an issue with FB profile pictures
-
-**1.0.8**
-
-- Fixed IG issue. Everything is working again
-
-**1.0.7**
-
-- You can use this extension to open and download TikT0k profile pictures
-
-**1.0.6**
-
-- You can use this extension to open and download IG profile pictures
-
-**1.0.5**
-
-- Fix `/friends/` and `/groups/` url problem. Now it's working on every page
-
-**1.0.4**
-
-- We received a trademark complaint from FB. So... I removed everything related to FB (logo, name, etc...)
-
-**1.0.3**
-
-- Fixed an issue with logged user profile
-
-**1.0.2**
-
-- Fixed "Access token" problem. Everything is working again
-
-**1.0.1**
-
-- Fixed silhouette image bug
-
-### Author
-
-[Adem Kouki](https://github.com/Ademking)
-
-### Contributing
-
-Open an issue or a pull request to suggest changes or additions
+1. Open `chrome://extensions` and turn on **Developer mode**.
+2. Turn off the Web Store "Profile Picture Viewer" so you don't get two menu items.
+3. Click **Load unpacked** and pick this folder.
